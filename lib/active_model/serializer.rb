@@ -101,14 +101,17 @@ end
     end
 
     def initialize(object, options={})
-      @object   = object
-      @scope    = options[:scope]
-      @root     = options.fetch(:root, self.class._root)
-      @meta_key = options[:meta_key] || :meta
-      @meta     = options[@meta_key]
-      @options  = options.reject{|k,v| [:scope, :root, :meta_key, :meta].include?(k) }
+      @object     = object
+      @scope      = options[:scope]
+      @root       = options.fetch(:root, self.class._root)
+      @meta_key   = options[:meta_key] || :meta
+      @meta       = options[@meta_key]
+      @response   = options[:response]
+      @pagination = options[:pagination]
+      @meta       = options[@meta_key]
+      @options    = options.reject{|k,v| [:scope, :root, :meta_key, :meta, :response, :pagination].include?(k) }
     end
-    attr_accessor :object, :scope, :meta_key, :meta, :root, :options
+    attr_accessor :object, :scope, :meta_key, :meta, :root, :options, :response, :pagination
 
     def json_key
       if root == true || root.nil?

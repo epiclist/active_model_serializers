@@ -17,10 +17,12 @@ module ActiveModel
       @root            = options.fetch(:root, self.class._root)
       @meta_key        = options[:meta_key] || :meta
       @meta            = options[@meta_key]
+      @response        = options[:response]
+      @pagination      = options[:pagination]
       @each_serializer = options[:each_serializer]
       @options         = options.merge(root: nil)
     end
-    attr_accessor :object, :root, :meta_key, :meta, :options
+    attr_accessor :object, :root, :meta_key, :meta, :options, :response, :pagination
 
     def json_key
       if root.nil?

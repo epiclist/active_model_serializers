@@ -2,7 +2,11 @@ module ActiveModel
   module Serializable
     def as_json(options={})
       if root = options.fetch(:root, json_key)
-        hash = { root => serializable_object }
+        hash              = {}
+        hash[:response]   = response            if response
+        hash[root]        = serializable_object
+        hash[:pagination] = pagination          if pagination
+
         hash.merge!(serializable_data)
         hash
       else
